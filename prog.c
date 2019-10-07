@@ -51,6 +51,7 @@ int main(void)
 	int run=1;
 	int cp=1;
 	int his=0;
+	int t = 1;
 	while(run)
 	{
 	
@@ -64,24 +65,38 @@ int main(void)
 		args=split(temp," ");
 		if(args==NULL)
 			continue;
-		if(strstr(temp,"!!"))
-			cp=0;
+		if (strcmp(args[0], "!!") == 0)
+		{
+			cp = 0;
+			if (his == 0)
+			{
+				printf("No command in history\n");
+				exit(1);
+			}
+			else
+			{
+
+				free(args);
+				args = split(temp1, " ");
+			}
+		}
 		else
 			cp=1;
 		int u=0;
-		int t=1;
+		
 		while(args[u+1]!=NULL)
 		{
 				
 			u++;
 		}
-		if(strcmp(args[u],"&")==0)
-		
+		if (strcmp(args[u], "&") == 0)
+
 		{
-			t=0;
-			printf("not wait");
-			args[u]=NULL;
+			t = 0;
+			args[u] = NULL;
 		}
+		else
+			t = 1;
 		if(strcmp(args[0],"exit")==0)
 		{
 			run=0;
@@ -94,20 +109,7 @@ else
 		{
 			int i=0;
 			int k=0;
-			if (strcmp(args[0],"!!")==0)
-			{
-				if(his==0)
-				{
-					printf("No command in history\n");
-					exit(1);
-				}
-				else
-				{
-					
-					free(args);
-					args=split(temp1," ");
-				}
-			}
+			
 			while(args[i]!=NULL)
 			{
 				
