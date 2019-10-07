@@ -180,10 +180,7 @@ else
 				wait(NULL);
 				
 			}
-			else
-			{
-				exit(1);	
-			}
+			
 				
 		}
 	}
