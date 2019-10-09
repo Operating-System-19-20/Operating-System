@@ -244,23 +244,19 @@ int main(void)
       if(id == 0)
       {
         
+	
+	
+	if(strstr(cmd,"|")!=NULL)
+	{
+		communication(args);
+		pipeline =1;
+	}
+	else
 	if(strstr(cmd,">")!=NULL)
-		if(strstr(cmd,"|")!=NULL)
-		{
-			communication(args);
-			pipeline =1;
-		}
-		else
-			filein(args);
-		else
-			if(strstr(cmd,"<")!=NULL)
-				if(strstr(cmd,"|")!=NULL)
-				{
-					communication(args);
-					pipeline =1;
-				}
-				else
-					fileout(args);
+		filein(args);
+	else
+		if(strstr(cmd,"<")!=NULL)
+			fileout(args);				
         // Execute cmd
         if(!pipeline) execvp(args[0],args);
         // End of child processing
@@ -271,7 +267,7 @@ int main(void)
       //if is not in history feature, save a copy of current cmd for future use
       if(history == 1&&cmd[0]!=0) strcpy(previousCmd,cmd);
 	if(args!=NULL)      
-		free (args);
+	free (args);
     }
   return 0;
 }
